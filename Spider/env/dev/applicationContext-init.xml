@@ -10,10 +10,6 @@
        http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd"
     default-autowire="byName">
 		<!-- CXF -->
-	<import resource="classpath:META-INF/cxf/cxf.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	
 	<!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
 	<context:component-scan base-package="*">
 		<!-- 去除@Controller -->

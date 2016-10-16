@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
-import org.apache.http.HttpException;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -42,7 +41,6 @@ public class SpiderService {
 
 	public TaskBean spiderHtml(TaskBean taskBean) throws Exception {
 		String url = taskBean.getUrl();
-		String urlhashcode = taskBean.getUrlhashcode();
 		String charset = taskBean.getCharset();
 		SpiderParamsBean spiderParamConfig = taskBean.getSpiderParamsBean();
 		HttpClient client = new DefaultHttpClient();
@@ -153,9 +151,7 @@ public class SpiderService {
 		if (taskBean.getSiteId() == 19352 && !taskBean.getUrl().contains("zhuanlan.zhihu.com")) {
 			response = decodeUnicode(response);
 		}
-		taskBean.setRealUrl(realUrl);
 		taskBean.setCharset(charset);
-		taskBean.setResponseCode(responseCode);
 		return taskBean;
 	}
 

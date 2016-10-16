@@ -12,8 +12,8 @@ public class TestSpiderHtmlService extends AbstractDependencyInjectionSpringCont
 	@Override
 	protected String[] getConfigLocations() {
 		return new String[] { 
-				//"applicationContext-init.xml","applicationContext-service.xml"
-				"applicationContext-*.xml"
+				"applicationContext-init.xml","applicationContext-service.xml"
+//				"applicationContext-*.xml"
 	  			  };
 	}
 	
