@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:simple="http://cxf.apache.org/simple" xmlns:soap="http://cxf.apache.org/bindings/soap"
+	xmlns:cxf="http://cxf.apache.org/core" xmlns:http="http://cxf.apache.org/transports/http/configuration"
+	xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+	xsi:schemaLocation=" 
+		  http://cxf.apache.org/transports/http/configuration	  
+		  http://cxf.apache.org/schemas/configuration/http-conf.xsd 
+          http://cxf.apache.org/bindings/soap 
+          http://cxf.apache.org/schemas/configuration/soap.xsd 
+          http://cxf.apache.org/simple 
+          http://cxf.apache.org/schemas/simple.xsd 
+          http://cxf.apache.org/jaxws 
+          http://cxf.apache.org/schemas/jaxws.xsd
+          http://www.springframework.org/schema/beans 
+		  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          "
+	default-autowire="byName">
+	
+	<jaxws:endpoint id="wsCrawlTaskService" implementor="#wsCrawlTaskServiceImpl"
+		address="/wsCrawlTaskService">
+		<jaxws:features>
+           <bean class="org.apache.cxf.transport.common.gzip.GZIPFeature" />
+       </jaxws:features>
+       <jaxws:inInterceptors>
+           <bean class="org.apache.cxf.transport.common.gzip.GZIPInInterceptor"></bean>
+       </jaxws:inInterceptors>
+       <jaxws:outInterceptors>
+           <bean class="org.apache.cxf.transport.common.gzip.GZIPOutInterceptor"></bean>
+       </jaxws:outInterceptors>
+	</jaxws:endpoint>
+	
+	<bean id="wsCrawlTaskServiceImpl"
+	      class="pub.willow.a.spider.ws.impl.WSCrawlTaskServiceImpl">
+	</bean>
+</beans>
