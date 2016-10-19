@@ -42,7 +42,6 @@ public class SpiderService {
 	public TaskBean spiderHtml(TaskBean taskBean) throws Exception {
 		String url = taskBean.getUrl();
 		String charset = taskBean.getCharset();
-		SpiderParamsBean spiderParamConfig = taskBean.getSpiderParamsBean();
 		HttpClient client = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("Referer", url);
@@ -52,8 +51,8 @@ public class SpiderService {
 		httpGet.setHeader("Accept-Encoding", "gzip, deflate");
 
 		// 抓取参数设置
-		if (spiderParamConfig != null) {
-			List<String> headers = spiderParamConfig.getHeaders();
+		List<String> headers = taskBean.getHeaders();
+		if (headers != null) {
 			for (String header : headers) {
 				String[] keyValueArray = header.split(HEADER_KEY_VALUE_SEPARATE);
 				if (keyValueArray != null && keyValueArray.length == 2) {
@@ -64,15 +63,15 @@ public class SpiderService {
 
 		client.getParams().setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 10000);// 连接时间20s
 		client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT, 10000);
-		
-		HttpResponse httpResponse = client.execute(httpGet);  
-		int statusCode = httpResponse.getStatusLine().getStatusCode();  
-		if (statusCode == HttpStatus.SC_OK) {  
-		    InputStream is = httpResponse.getEntity().getContent();  
-		    String source = getResponseBodyAsString(is,charset);
-		    taskBean.setSource(source);
-		}  
-		
+
+		HttpResponse httpResponse = client.execute(httpGet);
+		int statusCode = httpResponse.getStatusLine().getStatusCode();
+		if (statusCode == HttpStatus.SC_OK) {
+			InputStream is = httpResponse.getEntity().getContent();
+			String source = getResponseBodyAsString(is, charset);
+			taskBean.setSource(source);
+		}
+
 		return taskBean;
 	}
 
